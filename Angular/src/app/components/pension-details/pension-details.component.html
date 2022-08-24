@@ -1,0 +1,100 @@
+<mat-card class="example-card full-width-card text-center">
+    <!-- <mat-card-title>Shiba Inu</mat-card-title> -->
+    <mat-card-title>Enter details to calculate the pension amount</mat-card-title>
+    <mat-card-content class="card-content text-center">
+      <!-- <h1>Enter details to calculate the pension amount</h1> -->
+
+      <form #pensionForm='ngForm' (ngSubmit)="handlePensionerInput(); pensionForm.resetForm()">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input required [(ngModel)]="pensionerInput.name" name="name"
+                type="text" #control1="ngModel" matInput/>
+                <mat-error *ngIf="control1.invalid && control1.invalid">  
+                    <div *ngIf="control1.errors?.required">Name is required</div>  
+                </mat-error> 
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Date Of Birth</mat-label>
+                <input required [(ngModel)]="pensionerInput.dateOfBirth" name="dob" placeholder="DD/MM/YYYY"
+                type="date" #control1="ngModel" #dob=ngModel matInput/>
+                <mat-error *ngIf="control1.invalid && control1.invalid">
+                    <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="text-error">
+                        <div *ngIf="dob.errors?.required">
+                            * Date of Birth is required
+                        </div>
+                    </div>
+                </mat-error> 
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Pan Number</mat-label>
+                <input required [(ngModel)]="pensionerInput.pan" name="pan"
+                type="text" #control1="ngModel" pattern="^[A-Za-z0-9]{10}$"
+                placeholder="Enter the 10 digit PAN card number" #pan=ngModel matInput/>
+                <mat-error *ngIf="control1.invalid && control1.invalid">  
+                    <div *ngIf="pan.invalid && (pan.dirty || pan.touched)" class="text-error">
+                        <div *ngIf="pan.errors?.required">
+                            * PAN Card Number is required
+                        </div>
+                        <div *ngIf="pan.errors?.pattern">
+                            * PAN Card format is incorrect
+                        </div>
+                    </div>
+                </mat-error> 
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Aadhaar Number</mat-label>
+                <input required [(ngModel)]="pensionerInput.aadhaarNumber" name="aadhaarNumber"
+                type="text" #control1="ngModel" #aadhaar=ngModel
+                [(ngModel)]='pensionerInput.aadhaarNumber' pattern="^[0-9]{12}$"
+                placeholder="Enter the 12 digit Aadhaar number" required matInput/>
+                <mat-error *ngIf="control1.invalid && control1.invalid">  
+                    <div *ngIf="aadhaar.invalid && (aadhaar.dirty || aadhaar.touched)" class="text-error">
+                        <div *ngIf="aadhaar.errors?.required">
+                            * Aadhaar Number is required
+                        </div>
+                        <div *ngIf="aadhaar.errors?.pattern">
+                            * Aadhaar Number format is incorrect
+                        </div>
+                    </div>  
+                </mat-error> 
+            </mat-form-field>
+
+            <div class="row">
+                <div class="col md-6">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Pension Type</mat-label>
+                        <mat-select required [(value)]="types"  name="pensionType" [(ngModel)]="pensionerInput.pensionType" #ptype=ngModel>
+                        <mat-option value="Self">Self</mat-option>
+                        <mat-option value="Family">Family</mat-option>
+                            <mat-error *ngIf="control1.invalid && control1.invalid">  
+                                <div *ngIf="ptype.invalid && (ptype.dirty || ptype.touched)" class="text-error">
+                                    <div *ngIf="ptype.errors?.required">
+                                        * Pension type is required
+                                    </div>
+                                </div>
+                            </mat-error>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <button type="submit" mat-raised-button color="primary" class="btn" [disabled]="!pensionForm.valid">Calculate Pension</button>
+                <button type="reset" mat-raised-button color="accent" class="btn" (click)="handleReset()">Reset</button>
+            </div>
+
+        <!-- Error messages -->
+        <div class="text-error text-center mt-3" (mouseleave)="handleReset()">
+            <div *ngFor='let error of fieldErrors'>
+                <p>{{ error }}</p>
+            </div>
+        </div>
+      </form>
+    </mat-card-content>
+    
+  </mat-card>
+  <!-- Success Message -->
+<h2 [ngClass]="color" class="break-div main-head mt-3 text-center" (mouseleave)="handleReset()">{{ msg }}</h2>

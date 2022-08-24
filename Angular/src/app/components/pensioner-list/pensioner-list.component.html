@@ -1,0 +1,41 @@
+<div class="bg">
+    <mat-card class="example-card">
+        <mat-card-title class="text-center">Pensioner List</mat-card-title>
+        <mat-card-content>
+            <div class="container">
+                <!-- <h1 style="margin-top: 10px;" class="text-center">Pensioner List</h1> -->
+                <table class="table table-striped mt">
+                    <thead class="head text-center">
+                        <tr>
+                            <th>Aadhaar No</th>
+                            <th>Name</th>
+                            <th>Date Of Birth</th>
+                            <th>Pan No</th>
+                            <th>Salary</th>
+                            <th>Allowance</th>
+                            <th>Pension Type</th>
+                            <th>Bank Type</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tb text-center">
+                        <tr *ngFor= "let pensioner of pensionerList">
+                            <td>{{pensioner.aadhaarNumber}}</td>
+                            <td>{{pensioner.name}}</td>
+                            <td>{{pensioner.dateOfBirth}}</td>
+                            <td>{{pensioner.panNumber}}</td>
+                            <td>{{pensioner.salary}}</td>
+                            <td>{{pensioner.allowance}}</td>
+                            <td>{{pensioner.pensionType}}</td>
+                            <td>{{pensioner.bankDetail.bankType}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+    </mat-card>
+</div>
+    
+    
+    

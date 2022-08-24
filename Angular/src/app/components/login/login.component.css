@@ -1,0 +1,27 @@
+.container-body{
+    height: 650px;  
+    color: #fff;
+    background-image: url("../../../assets/images/1.jpg");  
+    background-size: 100%;  
+    background-size: cover;
+}
+
+.full-width{
+    width: 100%;
+    margin: auto;
+    /* justify-content: center; */
+}
+.full-width-card{
+    width: 60%;
+}
+.example-card{
+    background-color: #f2f9ff;
+    justify-content: center;
+    margin: auto;
+}
+.card-content{
+    justify-content: center;
+}
+.btn{
+    /* margin-left: 30px; */
+}

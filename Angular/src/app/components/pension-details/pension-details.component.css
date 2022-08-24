@@ -1,0 +1,40 @@
+.outer-div {
+    background-color: #3f51b5;
+    color: black;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.date-input{
+    margin-top: 0%;
+    width: 75%;
+}
+
+.break-div{
+    white-space: pre-line;
+}
+.form-group{
+    width:100%;
+}
+.full-width{
+    width: 60%;
+    margin: auto;
+    justify-content: center;
+}
+.full-width-card{
+    width: 75%;
+}
+.example-card{
+    background-color: #fff;
+    justify-content: center;
+    margin: auto;
+}
+.card-content{
+    justify-content: center;
+}
+.btn{
+    margin-left: 30px;
+}

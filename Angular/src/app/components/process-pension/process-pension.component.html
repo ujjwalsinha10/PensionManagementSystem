@@ -1,0 +1,91 @@
+<mat-card class="example-card full-width-card text-center col-lg-6 offset-lg-3">
+    <mat-card-title>Enter details to disburse the pension amount</mat-card-title>
+    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    <mat-card-content>
+        <!-- <h2 class="text-center">Enter details to disburse the pension amount</h2> -->
+<!-- <div class="outer-div  col-lg-6 offset-lg-3"> -->
+    <form (ngSubmit)='handleProcessPensionInput(); pensionForm.resetForm()' #pensionForm='ngForm' class="px-3">
+        <!-- Aadhaar Number -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Aadhaar Number</mat-label>
+            <input required [(ngModel)]="processPensionInput.aadhaarNumber" name="aadhaar"
+            type="text" #control1="ngModel" #aadhaar=ngModel pattern="^[0-9]{12}$"
+            placeholder="Enter the 12 digit Aadhaar number" matInput/>
+            <mat-error *ngIf="control1.invalid && control1.invalid">  
+                <div *ngIf="aadhaar.invalid && (aadhaar.dirty || aadhaar.touched)" class="text-error">
+                    <div *ngIf="aadhaar.errors?.required">
+                        * Aadhaar Number is required
+                    </div>
+                    <div *ngIf="aadhaar.errors?.pattern">
+                        * Aadhaar Number format is incorrect
+                    </div>
+                </div>
+            </mat-error> 
+        </mat-form-field>
+
+         <!-- Aadhaar ends here -->
+
+        <!-- Pension Amount -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Pension Amount</mat-label>
+            <input type="number" matInput id="pension-amount" name="amt" #amt=ngModel
+            [(ngModel)]='processPensionInput.pensionAmount' min=0 required placeholder="Enter the Pension Amount">
+            <!-- Validations -->
+            <mat-error *ngIf="control1.invalid && control1.invalid">
+                <div *ngIf="amt.invalid && (amt.dirty || amt.touched)" class="text-error">
+                    <div *ngIf="amt.errors?.required">
+                        * Pension amount is required
+                    </div>
+                    <div *ngIf="amt.errors?.min">
+                        * Pension amount should be non-negative (>=0)
+                    </div>
+                </div>
+            </mat-error>
+        </mat-form-field>
+        <!-- Pension amount ends here -->
+
+        <!-- Service charge Amount -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Service Charge (Public Bank - INR 500, Private Bank - INR 550)</mat-label>
+            <input type="number" matInput id="charge-amount" name="charge" #charge=ngModel
+            [(ngModel)]='processPensionInput.bankServiceCharge' min=0 required placeholder="Enter Service Charge">
+            <mat-hint>Service Charge (Public Bank - INR 500, Private Bank - INR 550)</mat-hint>
+            <!-- Validations -->
+            <mat-error *ngIf="control1.invalid && control1.invalid">
+                <div *ngIf="charge.invalid && (charge.dirty || charge.touched)" class="text-error">
+                    <div *ngIf="charge.errors?.required">
+                        * Service charge amount is required
+                    </div>
+                    <div *ngIf="charge.errors?.min">
+                        * Service charge amount should be non-negative (>=0)
+                    </div>
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+
+         <!-- Service charge amount ends here -->
+
+        <!-- Handle login and reset -->
+        <div class="text-center">
+            <button class="btn btn-primary mt-3 mx-3" [disabled]="!pensionForm.valid">Submit Details</button>
+            <button type="reset" class="btn btn-secondary mt-3" (click)="handleReset()">Reset</button>
+        </div><!-- Login ends here -->
+
+        <!-- Error messages -->
+        <div class="text-error text-center mt-3" (mouseleave)="handleReset()">
+            <div *ngFor='let error of fieldErrors'>
+                <p>{{ error }}</p>
+            </div>
+        </div>
+    </form> <!-- Form ends here -->
+<!-- </div> -->
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+
+
+
+<!-- Success Message -->
+<h2 [ngClass]="color" class="break-div main-head mt-3 text-center" (mouseleave)="handleReset()">{{ msg }}</h2>
